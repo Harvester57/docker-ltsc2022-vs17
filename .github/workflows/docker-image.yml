@@ -10,24 +10,24 @@ on:
 jobs:
 
   build:
-
     runs-on: windows-2022
-
     steps:
-    -
-      name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    - 
-      uses: actions/checkout@v2
-    - 
-      name: Build the Docker image
-      run: |
-        docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/vsbuildtools2022:latest
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/vsbuildtools2022:latest
-        docker logout
-      
-      
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/vsbuildtools2022:latest
