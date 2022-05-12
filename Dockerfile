@@ -1,8 +1,9 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2022 AS builder
+# Cf. https://hub.docker.com/_/microsoft-windows-servercore
+FROM mcr.microsoft.com/windows/servercore:ltsc2022-KB5013944-amd64 AS builder
 SHELL ["cmd", "/S", "/C"]
 
 LABEL maintainer "florian.stosse@safrangroup.com"
-LABEL lastupdate "01-12-2021"
+LABEL lastupdate "2022-05-12"
 LABEL author "Florian Stosse"
 LABEL description "Windows 10 LTSC 2022 image, with Microsoft Build Tools 2022 (v17.0)"
 LABEL license "MIT license"
@@ -28,7 +29,7 @@ RUN \
   --installPath C:/BuildTools
 
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2022
+FROM mcr.microsoft.com/windows/servercore:ltsc2022-KB5013944-amd64
 
 COPY --from=builder C:/BuildTools/ C:/BuildTools
 
