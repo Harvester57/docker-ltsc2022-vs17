@@ -1,9 +1,9 @@
 # Cf. https://hub.docker.com/_/microsoft-windows-servercore
-FROM mcr.microsoft.com/windows/servercore:ltsc2022-KB5013944-amd64 AS builder
+FROM mcr.microsoft.com/windows/servercore:ltsc2022-KB5022842-amd64 AS builder
 SHELL ["cmd", "/S", "/C"]
 
 LABEL maintainer "florian.stosse@safrangroup.com"
-LABEL lastupdate "2022-05-12"
+LABEL lastupdate "2023-02-14"
 LABEL author "Florian Stosse"
 LABEL description "Windows 10 LTSC 2022 image, with Microsoft Build Tools 2022 (v17.0)"
 LABEL license "MIT license"
@@ -26,10 +26,12 @@ RUN \
   --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended \
   --add Microsoft.VisualStudio.Component.VC.Llvm.Clang \
   --add Microsoft.VisualStudio.Component.VC.Llvm.ClangToolset \
+  --add Microsoft.VisualStudio.Component.VC.ATLMFC \
+  --add Microsoft.VisualStudio.Component.VC.CLI.Support \
   --installPath C:/BuildTools
 
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2022-KB5013944-amd64
+FROM mcr.microsoft.com/windows/servercore:ltsc2022-KB5022842-amd64
 
 COPY --from=builder C:/BuildTools/ C:/BuildTools
 
