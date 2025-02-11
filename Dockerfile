@@ -1,5 +1,5 @@
 # Cf. https://hub.docker.com/_/microsoft-windows-servercore
-FROM mcr.microsoft.com/windows/servercore:10.0.20348.2966 AS builder
+FROM mcr.microsoft.com/windows/servercore:10.0.26100.3194 AS builder
 SHELL ["cmd", "/S", "/C"]
 
 LABEL maintainer "florian.stosse@safrangroup.com"
@@ -30,7 +30,7 @@ RUN \
   --add Microsoft.VisualStudio.Component.VC.CLI.Support \
   --installPath C:/BuildTools
 
-FROM mcr.microsoft.com/windows/servercore:10.0.20348.2966
+FROM mcr.microsoft.com/windows/servercore:10.0.26100.3194
 
 COPY --from=builder C:/BuildTools/ C:/BuildTools
 
