@@ -1,12 +1,12 @@
 # Cf. https://hub.docker.com/_/microsoft-windows-servercore
-FROM mcr.microsoft.com/windows/servercore:10.0.20348.2966 AS builder
+FROM mcr.microsoft.com/windows/servercore:10.0.20348.3453 AS builder
 SHELL ["cmd", "/S", "/C"]
 
-LABEL maintainer "florian.stosse@safrangroup.com"
-LABEL lastupdate "2023-09-15"
-LABEL author "Florian Stosse"
-LABEL description "Windows 10 LTSC 2022 image, with Microsoft Build Tools 2022 (v17.0)"
-LABEL license "MIT license"
+LABEL maintainer="florian.stosse@gmail.com"
+LABEL lastupdate="2025-04-09"
+LABEL author="Florian Stosse"
+LABEL description="Windows 10 LTSC 2022 image, with Microsoft Build Tools 2022 (v17.0)"
+LABEL license="MIT license"
 
 # Set up environment to collect install errors.
 ADD https://aka.ms/vscollect.exe C:/TEMP/collect.exe
